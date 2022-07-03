@@ -2,7 +2,9 @@ import React from 'react';
 import theme from '../../styles/theme';
 
 import { BackButton } from '../../components/BackButton';
-
+import { StatusBar } from 'react-native';
+import { Button } from '../../components/Button';
+import { Calendar } from '../../components/Calendar';
 
 import ArrowSvg from '../../assets/arrow.svg';
 import {
@@ -17,8 +19,7 @@ import {
   Footer,
 } from './styles';
 
-import { StatusBar } from 'react-native';
-import { Button } from '../../components/Button';
+
 
 export function Scheduling(){
   return (
@@ -27,7 +28,7 @@ export function Scheduling(){
         <StatusBar
           barStyle='light-content'
           translucent
-          backgroundColor='transparent's
+          backgroundColor='transparent'
         />
         <BackButton color={theme.colors.shape} onPress={() => {}}/>
         <Title>
@@ -55,7 +56,7 @@ export function Scheduling(){
       </Header>
 
       <Content>
-
+        <Calendar />
       </Content>
 
       <Footer>
