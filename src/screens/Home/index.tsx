@@ -16,14 +16,15 @@ import {
 
 import { api } from '../../services/api';
 import { CarDTO } from '../../dtos/CarDTO';
+import { Load } from '../../components/Load';
 
 // import { RootStackParamList } from '../../@types/navigation';
 
 // type HomeScreenProps = NavigationProp<RootStackParamList, 'Home'>;
 
-export function Home(){
+export function Home() {
   const [cars, setCars] = useState<CarDTO[]>([]);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
   const carData = {
@@ -34,7 +35,7 @@ export function Home(){
       price: 1
     },
     thumbnail: 'https://cdn.sitewebmotors.com.br/uploads/userGallery/5fcfe53240728.png'
-    
+
   }
 
   function handleDetails() {
@@ -63,7 +64,7 @@ export function Home(){
       />
       <Header>
         <HeaderContent>
-          <Logo 
+          <Logo
             width={RFValue(108)}
             height={12}
           />
@@ -74,16 +75,18 @@ export function Home(){
         </HeaderContent>
       </Header>
 
-      <CarList
-        data={cars}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => 
-          <Car
-            data={item} 
-            onPress={handleDetails} 
-          />
-        }
-      />
+      {loading ? <Load /> :
+        <CarList
+          data={cars}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) =>
+            <Car
+              data={item}
+              onPress={handleDetails}
+            />
+          }
+        />
+      }
     </Container>
   );
 };
