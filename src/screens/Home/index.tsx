@@ -16,19 +16,16 @@ import {
 
 import { api } from '../../services/api';
 import { CarDTO } from '../../dtos/CarDTO';
+
 import { Load } from '../../components/Load';
-
-// import { RootStackParamList } from '../../@types/navigation';
-
-// type HomeScreenProps = NavigationProp<RootStackParamList, 'Home'>;
 
 export function Home() {
   const [cars, setCars] = useState<CarDTO[]>([]);
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
-  function handleDetails() {
-    navigation.navigate('CarDetails');
+  function handleDetails(car: CarDTO) {
+    navigation.navigate('CarDetails', { car });
   }
 
   useEffect(() => {
@@ -71,7 +68,7 @@ export function Home() {
           renderItem={({ item }) =>
             <Car
               data={item}
-              onPress={handleDetails}
+              onPress={() => handleDetails(item)}
             />
           }
         />
