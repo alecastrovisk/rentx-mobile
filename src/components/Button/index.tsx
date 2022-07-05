@@ -8,7 +8,7 @@ import {
 interface Props {
   title: string;
   color?: string;
-  // onPress: () => void;
+  onPress: () => void;
 }
 
 export function Button({
