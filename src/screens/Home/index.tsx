@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { StatusBar } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
@@ -13,17 +14,46 @@ import {
   CarList,
 } from './styles';
 
+import { api } from '../../services/api';
+import { CarDTO } from '../../dtos/CarDTO';
+
+// import { RootStackParamList } from '../../@types/navigation';
+
+// type HomeScreenProps = NavigationProp<RootStackParamList, 'Home'>;
+
 export function Home(){
+  const [cars, setCars] = useState<CarDTO[]>([]);
+  const [loading, setLoading] = useState(true); 
+  const navigation = useNavigation();
+
   const carData = {
-    brand: 'AUDI',
-    name: 'RS 5 Coupé',
+    brand: 'MEL',
+    name: 'PICHULA',
     rent: {
       period: 'AO DIA',
-      price: 120
+      price: 1
     },
     thumbnail: 'https://cdn.sitewebmotors.com.br/uploads/userGallery/5fcfe53240728.png'
     
   }
+
+  function handleDetails() {
+    navigation.navigate('CarDetails');
+  }
+
+  useEffect(() => {
+    async function fetchCars() {
+      try {
+        const response = await api.get('/cars');
+        setCars(response.data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchCars();
+  }, []);
   return (
     <Container>
       <StatusBar
@@ -45,9 +75,14 @@ export function Home(){
       </Header>
 
       <CarList
-        data={[1,2,3,4,5,6,7]}
-        keyExtractor={item => String(item)}
-        renderItem={({ item }) => <Car data={carData}/>}
+        data={cars}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => 
+          <Car
+            data={item} 
+            onPress={handleDetails} 
+          />
+        }
       />
     </Container>
   );

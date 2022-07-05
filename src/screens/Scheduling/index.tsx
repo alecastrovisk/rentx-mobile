@@ -19,9 +19,14 @@ import {
   Footer,
 } from './styles';
 
-
+import { useNavigation } from '@react-navigation/native';
 
 export function Scheduling(){
+  const navigation = useNavigation();
+  
+  function handleConfirmRental() {
+    navigation.navigate('SchedulingDetails');
+  }
   return (
     <Container>
       <Header>
@@ -61,6 +66,7 @@ export function Scheduling(){
 
       <Footer>
         <Button
+          onPress={handleConfirmRental}
           title='Confirmar'
         />
       </Footer>

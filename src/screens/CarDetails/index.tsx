@@ -30,7 +30,14 @@ import {
   Footer
 } from './styles';
 
-export function CarDetails(){
+import { useNavigation } from '@react-navigation/native';
+
+export function CarDetails() {
+  const navigation = useNavigation();
+
+  function handleConfirmRental() {
+    navigation.navigate('Scheduling');
+  }
   return (
     <Container>
       <StatusBar
@@ -79,8 +86,9 @@ export function CarDetails(){
       </Content>
 
       <Footer>
-        <Button 
-          title='Confirmar'
+        <Button
+          onPress={handleConfirmRental} 
+          title='Escolher período do aluguel'
         />
       </Footer>
     </Container>
