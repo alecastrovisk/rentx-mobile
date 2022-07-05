@@ -27,17 +27,6 @@ export function Home() {
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
-  const carData = {
-    brand: 'MEL',
-    name: 'PICHULA',
-    rent: {
-      period: 'AO DIA',
-      price: 1
-    },
-    thumbnail: 'https://cdn.sitewebmotors.com.br/uploads/userGallery/5fcfe53240728.png'
-
-  }
-
   function handleDetails() {
     navigation.navigate('CarDetails');
   }
