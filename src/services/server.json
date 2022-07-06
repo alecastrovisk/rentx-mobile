@@ -25,7 +25,7 @@
           "name": "800 HP"
         },
         {
-          "type": "electric_motor",
+          "type": "electric",
           "name": "Elétrico"
         },
         {
@@ -137,7 +137,7 @@
         "period": "Ao dia",
         "price": 120
       },
-      "fuel_type": "electric_motor",
+      "fuel_type": "electric",
       "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/4.png",
       "accessories": [
         {
@@ -153,7 +153,7 @@
           "name": "800 HP"
         },
         {
-          "type": "electric_motor",
+          "type": "electric",
           "name": "Elétrico"
         },
         {
