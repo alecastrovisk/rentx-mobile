@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Container,
@@ -9,15 +9,22 @@ interface Props {
   title: string;
   color?: string;
   onPress: () => void;
+  enabled?: boolean;
 }
 
 export function Button({
   title, 
   color,
-  ...rest
+  enabled = true,
+  onPress,
 }: Props){
   return (
-    <Container {...rest} color={color}>
+    <Container
+     onPress={onPress} 
+     color={color}
+     enabled={enabled}
+     style={{ opacity: enabled ? 1 : 0.5}}
+    >
       <Title>{title}</Title>
     </Container>
   );

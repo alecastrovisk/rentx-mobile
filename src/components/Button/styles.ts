@@ -5,6 +5,7 @@ import styled from 'styled-components/native';
 
 interface ButtonProps extends TouchableOpacityProps{
   color?: string;
+  enabled: boolean;
 }
 
 export const Container = styled.TouchableOpacity<ButtonProps>`
