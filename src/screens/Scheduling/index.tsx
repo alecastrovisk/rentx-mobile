@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import theme from '../../styles/theme';
 
 import { BackButton } from '../../components/BackButton';
@@ -90,7 +90,7 @@ export function Scheduling(){
       endFormatted: format(getPlatformDate(new Date(endDate)), 'dd/MM/yyyy')
     })
   }
-
+  
   return (
     <Container>
       <Header>

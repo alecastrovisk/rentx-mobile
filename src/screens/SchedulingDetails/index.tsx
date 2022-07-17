@@ -10,13 +10,6 @@ import { ImageSlider } from '../../components/ImageSlider';
 import { Accessory } from '../../components/Accessory';
 import { Button } from '../../components/Button';
 
-import SpeedSvg from '../../assets/speed.svg';
-import AccelerationSvg from '../../assets/acceleration.svg';
-import ForceSvg from '../../assets/force.svg';
-import GasolineSvg from '../../assets/gasoline.svg';
-import ExchangeSvg from '../../assets/exchange.svg';
-import PeopleSvg from '../../assets/people.svg';
-
 import {
   Container,
   Header,
@@ -63,6 +56,8 @@ interface RentalPeriod {
 
 export function SchedulingDetails(){
   const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod);
+  const [loading, setLoading] = useState(false);
+
   const theme = useTheme();
   const navigation = useNavigation();
 
@@ -72,6 +67,7 @@ export function SchedulingDetails(){
   const rentTotal = Number(dates.length * car.rent.price);
 
   async function handleConfirmRental() {
+
     const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`);
 
     const unavailable_dates = [
@@ -79,6 +75,7 @@ export function SchedulingDetails(){
       ...dates
     ];
 
+    setLoading(true);
     await api.post('/schedules_byuser', {
       user_id: 5,
       car,
@@ -91,7 +88,10 @@ export function SchedulingDetails(){
       unavailable_dates
     })
     .then(() => navigation.navigate('SchedulingComplete'))
-    .catch(() => Alert.alert('Não foi possível confirmar o agendamento!'))
+    .catch(() => {
+      setLoading(false);  
+      Alert.alert('Não foi possível confirmar o agendamento!')
+    })
   }
 
   function handleBack() {
@@ -189,6 +189,8 @@ export function SchedulingDetails(){
           onPress={handleConfirmRental}
           color={theme.colors.sucess} 
           title='Alugar agora'
+          enabled={!loading}
+          loading={loading}
         />
       </Footer>
     </Container>

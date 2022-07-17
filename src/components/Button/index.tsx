@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, TouchableOpacityProps } from 'react-native';
+import { useTheme } from 'styled-components';
 
 import {
   Container,
   Title
 } from './styles';
 
-interface Props {
+interface Props extends TouchableOpacityProps{
   title: string;
   color?: string;
   onPress: () => void;
   enabled?: boolean;
+  loading?: boolean;
 }
 
 export function Button({
@@ -17,15 +20,21 @@ export function Button({
   color,
   enabled = true,
   onPress,
+  loading = false,
 }: Props){
+  const theme = useTheme();
   return (
     <Container
      onPress={onPress} 
      color={color}
      enabled={enabled}
-     style={{ opacity: enabled ? 1 : 0.5}}
+     style={{ opacity: (enabled === false || loading === true) ? .5 : 1}}
     >
-      <Title>{title}</Title>
+      {
+      loading  
+        ? <ActivityIndicator color={theme.colors.shape} />
+        : <Title>{title}</Title>
+      }
     </Container>
   );
 };
