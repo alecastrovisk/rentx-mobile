@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ActivityIndicator, TouchableOpacityProps } from 'react-native';
 import { useTheme } from 'styled-components';
 
@@ -19,10 +19,11 @@ export function Button({
   title, 
   color,
   enabled = true,
-  onPress,
   loading = false,
+  onPress,
 }: Props){
   const theme = useTheme();
+  
   return (
     <Container
      onPress={onPress} 

@@ -67,7 +67,8 @@ export function SchedulingDetails(){
   const rentTotal = Number(dates.length * car.rent.price);
 
   async function handleConfirmRental() {
-
+    setLoading(true);
+    
     const schedulesByCar = await api.get(`/schedules_bycars/${car.id}`);
 
     const unavailable_dates = [
@@ -75,7 +76,6 @@ export function SchedulingDetails(){
       ...dates
     ];
 
-    setLoading(true);
     await api.post('/schedules_byuser', {
       user_id: 5,
       car,
