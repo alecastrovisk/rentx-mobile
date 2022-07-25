@@ -18,7 +18,7 @@ interface Props extends TouchableOpacityProps{
 export function Button({
   title, 
   color,
-  enabled = true,
+  disabled = false,
   loading = false,
   onPress,
 }: Props){
@@ -28,8 +28,8 @@ export function Button({
     <Container
      onPress={onPress} 
      color={color}
-     enabled={enabled}
-     style={{ opacity: (enabled === false || loading === true) ? .5 : 1}}
+     disabled={disabled}
+     style={{ opacity: (disabled === false || loading === true) ? .5 : 1}}
     >
       {
       loading  
