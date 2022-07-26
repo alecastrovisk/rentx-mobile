@@ -189,7 +189,7 @@ export function SchedulingDetails(){
           onPress={handleConfirmRental}
           color={theme.colors.sucess} 
           title='Alugar agora'
-          enabled={!loading}
+          disabled={loading}
           loading={loading}
         />
       </Footer>

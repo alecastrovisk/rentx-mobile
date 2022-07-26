@@ -29,7 +29,7 @@ export function Button({
      onPress={onPress} 
      color={color}
      disabled={disabled}
-     style={{ opacity: (disabled === false || loading === true) ? .5 : 1}}
+     style={{ opacity: (disabled === false || loading === true) ? 1 : .5}}
     >
       {
       loading  
