@@ -575,7 +575,17 @@
         "2022-07-28",
         "2022-07-29",
         "2022-07-30",
-        "2022-07-31"
+        "2022-07-31",
+        "2022-07-31",
+        "2022-08-01",
+        "2022-08-02",
+        "2022-08-03",
+        "2022-08-04",
+        "2022-08-05",
+        "2022-08-06",
+        "2022-08-07",
+        "2022-08-08",
+        "2022-08-09"
       ]
     },
     {
@@ -602,6 +612,54 @@
     }
   ],
   "schedules_byuser": [
-    
+    {
+      "user_id": 5,
+      "car": {
+        "id": "508e7193-0078-4615-9071-920b59038fda",
+        "brand": "volvo",
+        "name": "XC40",
+        "about": "A Poderosa Combinação de um Motor Elétrico de Alto Desempenho e um Motor a Combustão. Compacto e Inovador. Com Design Expressivo, Tecnologias Intuitivas e Estilo Urbano.",
+        "rent": {
+          "period": "Ao dia",
+          "price": 120
+        },
+        "fuel_type": "gasoline_motor",
+        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/5.png",
+        "accessories": [
+          {
+            "type": "speed",
+            "name": "180km/h"
+          },
+          {
+            "type": "acceleration",
+            "name": "1.5s"
+          },
+          {
+            "type": "turning_diameter",
+            "name": "600 HP"
+          },
+          {
+            "type": "gasoline_motor",
+            "name": "Gasolina"
+          },
+          {
+            "type": "exchange",
+            "name": "Auto"
+          },
+          {
+            "type": "seats",
+            "name": "5 pessoas"
+          }
+        ],
+        "photos": [
+          "https://storage.googleapis.com/golden-wind/ignite/react-native/images/12.png",
+          "https://storage.googleapis.com/golden-wind/ignite/react-native/images/13.png",
+          "https://storage.googleapis.com/golden-wind/ignite/react-native/images/14.png"
+        ]
+      },
+      "startDate": "31/07/2022",
+      "endDate": "09/08/2022",
+      "id": 1
+    }
   ]
 }
