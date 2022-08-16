@@ -9,18 +9,21 @@ import Animated, {
   withTiming,
   Easing,
   interpolate,
-  Extrapolate
+  Extrapolate,
+  runOnJS
 } from 'react-native-reanimated';
 
 import {
   Container,
 } from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 // remember cubic bezier exists
 
 export function Splash(){
   const splashAnimation = useSharedValue(0);
 
+  const navigation = useNavigation();
 
   const brandStyle = useAnimatedStyle(() => {
     return {
@@ -53,8 +56,20 @@ export function Splash(){
   });
 
   useEffect(()=>{
-    splashAnimation.value = withTiming(50, { duration: 1000 });
+    splashAnimation.value = withTiming(
+      50, 
+      { duration: 1000 },
+      () => {
+        'worklet'
+        runOnJS(startApp)();
+        
+      }
+      );
   }, []);
+
+  function startApp() {
+    navigation.navigate('Home')
+  }
 
   return (
     <Container>
