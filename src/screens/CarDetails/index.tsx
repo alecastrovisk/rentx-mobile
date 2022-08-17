@@ -1,5 +1,5 @@
 import React from 'react';
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import Animated, {
   useAnimatedScrollHandler,
@@ -16,7 +16,6 @@ import { Accessory } from '../../components/Accessory';
 import { Button } from '../../components/Button';
 
 import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
-
 
 import {
   Container,
@@ -45,7 +44,7 @@ export function CarDetails() {
   const navigation = useNavigation();
   const route = useRoute();
   const theme = useTheme();
-  
+
   const { car } = route.params as Params;
 
   const scrollY = useSharedValue(0);
@@ -79,11 +78,12 @@ export function CarDetails() {
 
   function handleConfirmRental() {
     navigation.navigate('Scheduling', { car });
-  }
+  };
 
   function handleBack() {
     navigation.goBack();
-  }
+  };
+
   return (
     <Container>
       <StatusBar
@@ -94,9 +94,9 @@ export function CarDetails() {
 
       <Animated.View
         style={[
-          headerStyleAnimation, 
+          headerStyleAnimation,
           styles.header,
-          {backgroundColor: theme.colors.background_secondary}
+          { backgroundColor: theme.colors.background_secondary }
         ]}
       >
         <Header>
