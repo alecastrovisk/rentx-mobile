@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import {
+  StatusBar, 
+  TouchableOpacity, 
+  StyleSheet, 
+  BackHandler 
+} from 'react-native';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
-import { StatusBar, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
 
@@ -87,6 +92,12 @@ export function Home() {
     }
     fetchCars();
   }, []);
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      return true;
+    })
+  }, []);
   return (
     <Container>
       <StatusBar
@@ -101,9 +112,12 @@ export function Home() {
             height={12}
           />
 
-          <TotalCars>
-            Total de {cars.length} carros
-          </TotalCars>
+          {
+            !loading &&          
+            <TotalCars>
+              Total de {cars.length} carros
+            </TotalCars>
+          }
         </HeaderContent>
       </Header>
 
