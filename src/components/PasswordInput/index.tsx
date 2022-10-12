@@ -8,11 +8,12 @@ import {
   InputText,
   IconContainer,
 } from './styles';
+
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface Props extends TextInputProps {
   iconName: React.ComponentProps<typeof Feather>['name'];
-  value: string;
+  value?: string;
 }
 
 export function PasswordInput({
@@ -39,8 +40,8 @@ export function PasswordInput({
     setIsPasswordVisible(prevState => !prevState);
   }
   return (
-    <Container isFocused={isFocused}>
-      <IconContainer>
+    <Container>
+      <IconContainer isFocused={isFocused}>
         <Feather
           name={iconName}
           size={24}
@@ -51,6 +52,7 @@ export function PasswordInput({
       </IconContainer>
 
       <InputText
+        isFocused={isFocused}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         secureTextEntry={isPasswordVisible}
@@ -58,7 +60,7 @@ export function PasswordInput({
       />
 
       <TouchableOpacity onPress={handlePasswordVisbilityChange}>
-        <IconContainer>
+        <IconContainer isFocused={isFocused}>
           <Feather
             name={isPasswordVisible ? 'eye' : 'eye-off'}
             size={24}

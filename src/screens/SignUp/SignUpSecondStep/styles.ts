@@ -43,6 +43,7 @@ export const Subtitle = styled.Text`
 export const Form = styled.View`
   width: 100%;
   margin-top: 64px;
+  margin-bottom: 8px;
 `;
 
 export const FormTitle = styled.Text`

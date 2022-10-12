@@ -13,19 +13,17 @@ import {
 } from './styles';
 
 import { Bullet } from '../../../components/Bullet';
-import { Input } from '../../../components/Input';
 import { Button } from '../../../components/Button';
 import { Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import { PasswordInput } from '../../../components/PasswordInput';
+import { useTheme } from 'styled-components';
 
-export function SignUpFirstStep() {
+export function SignUpSecondStep() {
   const navigation = useNavigation();
+  const theme = useTheme();
 
   function handleBack() {
     navigation.goBack();
-  }
-
-  function handleNextStep() {
-    navigation.navigate('SignUpSecondStep')
   }
 
   return (
@@ -50,28 +48,23 @@ export function SignUpFirstStep() {
 
           <Form>
             <FormTitle>
-              1. Dados
+              2. Senha
             </FormTitle>
 
-            <Input
-              iconName="user"
-              placeholder="Nome"
+            <PasswordInput
+              iconName="lock"
+              placeholder="senha"
             />
-            <Input
-              iconName="mail"
-              placeholder="E-mail"
-              keyboardType="email-address"
-            />
-            <Input
-              iconName="credit-card"
-              placeholder="CNH"
-              keyboardType="numeric"
+            <PasswordInput
+              iconName="lock"
+              placeholder="repetir senha"
             />
           </Form>
 
           <Button
-            onPress={handleNextStep}
-            title="Próximo"
+            onPress={() => { }}
+            title="Cadastrar"
+            color={theme.colors.sucess}
           />
         </Container>
       </TouchableWithoutFeedback>
