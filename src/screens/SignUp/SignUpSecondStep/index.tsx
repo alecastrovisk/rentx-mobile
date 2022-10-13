@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Alert, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { BackButton } from '../../../components/BackButton';
+import { useTheme } from 'styled-components';
 
 import {
   Container,
@@ -18,10 +19,11 @@ interface Params {
 
 import { Bullet } from '../../../components/Bullet';
 import { Button } from '../../../components/Button';
-import { Alert, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
 import { PasswordInput } from '../../../components/PasswordInput';
-import { useTheme } from 'styled-components';
+import { BackButton } from '../../../components/BackButton';
+
 import { UserDTO } from '../../../dtos/CarDTO';
+import { api } from '../../../services/api';
 
 export function SignUpSecondStep() {
   const [password, setPassword] = useState('');
@@ -37,7 +39,7 @@ export function SignUpSecondStep() {
     navigation.goBack();
   }
 
-  function handleRegister() {
+  async function handleRegister() {
     if(!password || !confirmPassword) {
       return Alert.alert('Informe a senha e a confirmação dela.');
     }
@@ -45,6 +47,24 @@ export function SignUpSecondStep() {
     if(password !== confirmPassword) {
       return Alert.alert('As senhas não são iguais.');
     }
+
+    await api.post('/users', {
+      name: user.name,
+      email: user.email,
+      driver_license: user.driverLicense,
+      password,
+    })
+    .then(() => {
+      navigation.navigate('Confirmation', {
+        nextScreenRoute: 'SignIn',
+        title: 'Conta Criada!',
+        message: `Agora é só fazer o login\n e aproveitar`
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      Alert.alert('Opa', 'Não foi possível cadastrar');
+    });
   }
 
   return (
