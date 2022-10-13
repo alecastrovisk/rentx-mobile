@@ -15,3 +15,9 @@ export interface CarDTO {
   }[];
   photos: string[];
 }
+
+export interface UserDTO {
+  name: string;
+  email: string;
+  driverLicense: string;
+}

@@ -1,4 +1,4 @@
-import { CarDTO } from "../../dtos/CarDTO";
+import { CarDTO, UserDTO } from "../../dtos/CarDTO";
 
 export type RootStackParamList = {
   Home: undefined;
@@ -8,7 +8,7 @@ export type RootStackParamList = {
   SchedulingComplete: undefined;
   MyCars: undefined;
   SignUpFirstStep: undefined;
-  SignUpSecondStep: undefined;
+  SignUpSecondStep: {user: UserDTO };
 }
 
 declare global {
