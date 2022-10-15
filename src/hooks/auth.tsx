@@ -4,6 +4,7 @@ import React, {
   useContext,
   ReactNode
 } from 'react';
+
 import { api } from '../services/api';
 
 interface User {
