@@ -1,4 +1,4 @@
-package com.rentx;
+package com.alecastrovisk.rentx;
 
 import android.os.Build;
 import android.os.Bundle;
