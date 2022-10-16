@@ -35,7 +35,7 @@ export function AppTabRoutes() {
         component={AppStackRoutes}
         options={{
           tabBarIcon: ({ color }) => (
-            <HomeSvg width={24} height={24} fill={color} />
+            <HomeSvg width={24} height={24} color={color} />
           )
         }}
       />
@@ -44,7 +44,7 @@ export function AppTabRoutes() {
         component={Home}
         options={{
           tabBarIcon: ({ color }) => (
-            <CarSvg width={24} height={24} fill={color} />
+            <CarSvg width={24} height={24} color={color}/>
           )
         }}
       />
@@ -53,7 +53,7 @@ export function AppTabRoutes() {
         component={MyCars}
         options={{
           tabBarIcon: ({ color }) => (
-            <PeopleSvg width={24} height={24} fill={color} />
+            <PeopleSvg width={24} height={24} color={color} />
           )
         }}
       />  
