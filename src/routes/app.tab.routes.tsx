@@ -18,6 +18,7 @@ export function AppTabRoutes() {
   const theme = useTheme();
   return(
     <Navigator
+      initialRouteName='Home'
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: theme.colors.main,
