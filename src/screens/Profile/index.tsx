@@ -36,7 +36,7 @@ import { PasswordInput } from '../../components/PasswordInput';
 import { useAuth } from '../../hooks/auth';
 
 export function Profile() {
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
 
   const [option, setOption] = useState<'dataEdit' | 'passwordEdit'>('dataEdit');
   const [avatar, setAvatar] = useState(user.avatar);
@@ -49,9 +49,6 @@ export function Profile() {
   function handleBack() {
     navigation.goBack();
   }
-
-  function handleSignOut() {
-  } 
 
   async function handleAvatarSelect() {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -87,7 +84,7 @@ export function Profile() {
                 onPress={handleBack}
               />
               <HeaderTitle>Editar Perfil</HeaderTitle>
-              <LogoutButton onPress={() => { }}>
+              <LogoutButton onPress={signOut}>
                 <Feather
                   name="power"
                   size={24}
