@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  Alert
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from '@react-navigation/native';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import * as Yup from 'yup';
 
 import { BackButton } from '../../components/BackButton';
 
@@ -31,12 +33,14 @@ import {
   OptionTitle,
   Section
 } from './styles';
+
 import { Input } from '../../components/Input';
+import { Button } from '../../components/Button';
 import { PasswordInput } from '../../components/PasswordInput';
 import { useAuth } from '../../hooks/auth';
 
 export function Profile() {
-  const { user, signOut } = useAuth();
+  const { user, signOut, updatedUser } = useAuth();
 
   const [option, setOption] = useState<'dataEdit' | 'passwordEdit'>('dataEdit');
   const [avatar, setAvatar] = useState(user.avatar);
@@ -66,7 +70,36 @@ export function Profile() {
       const { uri } = result as ImageInfo;
       setAvatar(uri);
     }
+  }
 
+  async function handleProfileUpdate() {
+    try {
+      const schema = Yup.object().shape({
+        driverLicense: Yup.string().required('CNH é obrigatória'),
+        name: Yup.string().required('Nome é obrigatório')
+      });
+
+      const data = {name, driverLicense};
+      await schema.validate(data);
+
+      await updatedUser({
+        id: user.id,
+        user_id: user.user_id,
+        email: user.email,
+        name,
+        driver_license: driverLicense,
+        avatar,
+        token: user.token
+      });
+
+      Alert.alert('Perfil atualizado');
+    } catch (error) {
+      if(error instanceof Yup.ValidationError) {
+        Alert.alert('Opa', error.message)
+      }else {
+      Alert.alert('Não foi possível atualizar o perfil');
+      }
+    }
   }
 
   function handleOptionChange(optionSelected: 'dataEdit' | 'passwordEdit') {
@@ -171,6 +204,11 @@ export function Profile() {
                 />
               </Section>
             } 
+
+            <Button
+              title="Salvar alterações"
+              onPress={handleProfileUpdate}
+            />
           </Content>
         </Container>
       </TouchableWithoutFeedback>
