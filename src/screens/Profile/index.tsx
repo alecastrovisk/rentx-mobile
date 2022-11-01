@@ -106,6 +106,22 @@ export function Profile() {
     setOption(optionSelected);
   }
 
+  async function handleSignOut() {
+    Alert.alert(
+      'Tem certeza?',
+      'Se você sair, precisará fazer o login novamente',
+      [
+        {
+          text: 'Cancelar',
+          onPress: () => {}
+        },
+        {
+          text: 'Sair',
+          onPress: () => signOut()
+        }
+      ]);
+  }
+
   return (
     <KeyboardAvoidingView enabled behavior="position" >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -117,7 +133,7 @@ export function Profile() {
                 onPress={handleBack}
               />
               <HeaderTitle>Editar Perfil</HeaderTitle>
-              <LogoutButton onPress={signOut}>
+              <LogoutButton onPress={handleSignOut}>
                 <Feather
                   name="power"
                   size={24}
