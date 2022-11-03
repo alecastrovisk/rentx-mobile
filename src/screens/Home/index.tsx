@@ -31,6 +31,7 @@ export function Home() {
   const [cars, setCars] = useState<CarModel[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const netInfo = useNetInfo();
   const navigation = useNavigation();
 
   function handleDetails(car: CarDTO) {
@@ -80,6 +81,12 @@ export function Home() {
     }
   }, []);
 
+  useEffect(() => {
+    if(netInfo.isConnected === true) {
+      offlineSynchronize()
+    }
+  },[netInfo.isConnected]);
+
   return (
     <Container>
       <StatusBar
@@ -89,13 +96,9 @@ export function Home() {
       />
       <Header>
         <HeaderContent>
-          {/* <Logo
+          <Logo
             width={RFValue(108)}
             height={12}
-          /> */}
-          <Button
-            title="Sincronizar"
-            onPress={offlineSynchronize}
           />
           {
             !loading &&          
