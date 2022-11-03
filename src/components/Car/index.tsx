@@ -1,7 +1,8 @@
 import React from 'react';
 import { TouchableOpacityProps } from 'react-native';
 
-import { CarDTO } from '../../dtos/CarDTO';
+// import { CarDTO } from '../../dtos/CarDTO';
+import { Car as CarModel } from '../../database/model/Car';
 import { getAccessoryIcon } from '../../utils/getAccessoryIcon';
 
 import {
@@ -19,7 +20,7 @@ import {
 
 
 interface Props extends TouchableOpacityProps {
-  data: CarDTO;
+  data: CarModel;
 }
 
 export function Car({ data, ...rest }: Props){

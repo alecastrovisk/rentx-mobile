@@ -97,7 +97,8 @@ export function Profile() {
       if(error instanceof Yup.ValidationError) {
         Alert.alert('Opa', error.message)
       }else {
-      Alert.alert('Não foi possível atualizar o perfil');
+        console.log(error);
+        Alert.alert('Não foi possível atualizar o perfil');
       }
     }
   }

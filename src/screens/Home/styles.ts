@@ -1,11 +1,12 @@
 import { FlatList, FlatListProps, TouchableOpacity } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
-import { CarDTO } from '../../dtos/CarDTO';
+// import { CarDTO } from '../../dtos/CarDTO';
+import { Car as CarModel} from '../../database/model/Car';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${({ theme }) => theme.colors.backgroud_primary};
+  background-color: ${({ theme }) => theme.colors.background_primary};
 `;
 
 export const Header = styled.View`
@@ -30,7 +31,7 @@ export const HeaderContent = styled.View`
   align-items: center;
 `;
 
-export const CarList = styled(FlatList as new (props: FlatListProps<CarDTO>) => FlatList<CarDTO>)
+export const CarList = styled(FlatList as new (props: FlatListProps<CarModel>) => FlatList<CarModel>)
 .attrs({
   contentContainerStyle: {
     padding: 24

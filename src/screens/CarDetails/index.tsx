@@ -33,6 +33,7 @@ import {
   Footer
 } from './styles';
 import { CarDTO } from '../../dtos/CarDTO';
+// import { Car as CarModel } from '../../database/model/Car';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import { useTheme } from 'styled-components';
 
