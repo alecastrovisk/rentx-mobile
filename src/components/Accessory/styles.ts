@@ -8,7 +8,7 @@ export const Container = styled.View`
   justify-content: center;
   align-items: center;
 
-  background-color: ${({ theme}) => theme.colors.backgroud_primary};
+  background-color: ${({ theme}) => theme.colors.background_primary};
 
   padding: 16px;
 

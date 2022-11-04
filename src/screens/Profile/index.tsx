@@ -3,7 +3,8 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
-  Alert
+  Alert,
+  StatusBar
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from '@react-navigation/native';
@@ -38,6 +39,7 @@ import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { PasswordInput } from '../../components/PasswordInput';
 import { useAuth } from '../../hooks/auth';
+import { useNetInfo } from '@react-native-community/netinfo';
 
 export function Profile() {
   const { user, signOut, updatedUser } = useAuth();
@@ -47,6 +49,7 @@ export function Profile() {
   const [name, setName] = useState(user.name);
   const [driverLicense, setDriverLicense] = useState(user.driver_license);
 
+  const netInfo = useNetInfo();
   const theme = useTheme();
   const navigation = useNavigation();
 
@@ -58,11 +61,11 @@ export function Profile() {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4,4],
+      aspect: [4, 4],
       quality: 1
     });
 
-    if(result.cancelled) {
+    if (result.cancelled) {
       return;
     }
 
@@ -79,7 +82,7 @@ export function Profile() {
         name: Yup.string().required('Nome é obrigatório')
       });
 
-      const data = {name, driverLicense};
+      const data = { name, driverLicense };
       await schema.validate(data);
 
       await updatedUser({
@@ -94,9 +97,9 @@ export function Profile() {
 
       Alert.alert('Perfil atualizado');
     } catch (error) {
-      if(error instanceof Yup.ValidationError) {
+      if (error instanceof Yup.ValidationError) {
         Alert.alert('Opa', error.message)
-      }else {
+      } else {
         console.log(error);
         Alert.alert('Não foi possível atualizar o perfil');
       }
@@ -104,7 +107,11 @@ export function Profile() {
   }
 
   function handleOptionChange(optionSelected: 'dataEdit' | 'passwordEdit') {
-    setOption(optionSelected);
+    if (netInfo.isConnected === false && optionSelected === 'dataEdit') {
+      Alert.alert('Conecte-se à internet para mudar a senha!');
+    } else {
+      setOption(optionSelected);
+    }
   }
 
   async function handleSignOut() {
@@ -114,7 +121,7 @@ export function Profile() {
       [
         {
           text: 'Cancelar',
-          onPress: () => {}
+          onPress: () => { }
         },
         {
           text: 'Sair',
@@ -127,6 +134,11 @@ export function Profile() {
     <KeyboardAvoidingView enabled behavior="position" >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Container>
+          <StatusBar
+            barStyle='dark-content'
+            backgroundColor='transparent'
+            translucent
+          />
           <Header>
             <HeaderTop>
               <BackButton
@@ -183,44 +195,44 @@ export function Profile() {
             </Options>
             {
               option === 'dataEdit' ?
-              <Section>
-                <Input
-                  iconName="user"
-                  placeholder="nome"
-                  autoCorrect={false}
-                  defaultValue={user.name}
-                  onChangeText={setName}
-                />
-                <Input
-                  iconName="mail"
-                  editable={false}
-                  autoCorrect={false}
-                  defaultValue={user.email}
-                />
-                <Input
-                  iconName="credit-card"
-                  placeholder="CNH"
-                  keyboardType="numeric"
-                  defaultValue={user.driver_license}
-                  onChangeText={setDriverLicense}
-                />
-              </Section>
-              :
-              <Section>
-                <PasswordInput
-                  iconName="lock"
-                  placeholder="Senha atual"
-                />
-                <PasswordInput
-                  iconName="lock"
-                  placeholder="Nova senha"
-                />
-                <PasswordInput
-                  iconName="lock"
-                  placeholder="Repetir senha"
-                />
-              </Section>
-            } 
+                <Section>
+                  <Input
+                    iconName="user"
+                    placeholder="nome"
+                    autoCorrect={false}
+                    defaultValue={user.name}
+                    onChangeText={setName}
+                  />
+                  <Input
+                    iconName="mail"
+                    editable={false}
+                    autoCorrect={false}
+                    defaultValue={user.email}
+                  />
+                  <Input
+                    iconName="credit-card"
+                    placeholder="CNH"
+                    keyboardType="numeric"
+                    defaultValue={user.driver_license}
+                    onChangeText={setDriverLicense}
+                  />
+                </Section>
+                :
+                <Section>
+                  <PasswordInput
+                    iconName="lock"
+                    placeholder="Senha atual"
+                  />
+                  <PasswordInput
+                    iconName="lock"
+                    placeholder="Nova senha"
+                  />
+                  <PasswordInput
+                    iconName="lock"
+                    placeholder="Repetir senha"
+                  />
+                </Section>
+            }
 
             <Button
               title="Salvar alterações"
