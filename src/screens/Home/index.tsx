@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
   StatusBar,
-  Button
 } from 'react-native';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';

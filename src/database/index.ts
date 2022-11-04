@@ -12,8 +12,8 @@ const adapter = new SQLiteAdapter({
 export const database = new Database({
   adapter,
   modelClasses: [
-     User,
-     Car
+    User,
+    Car
   ]
 })
 
